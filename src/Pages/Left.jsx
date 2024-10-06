@@ -38,11 +38,11 @@ const Left = () => {
     {/* user and the info will be from apis */}
     <div className="flex justify-between mt-10 w-3/4 items-center">
     <div className="flex items-center  ms-4 ">
-        <img src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png" alt="user" className="rounded-full h-10 w-10" />
+        <img src="https://pbs.twimg.com/profile_images/1479980047104716802/59hXnWM__400x400.jpg" alt="user" className="rounded-full h-10 w-10" />
         <div className="ml-2">
-            <h1 className="text-white font-bold">John Doe</h1>
+            <h1 className="text-white font-bold">nora</h1>
             <p className="text-gray-400">
-                @johndoe
+                @tu_nourah
             </p>
 
             </div>
