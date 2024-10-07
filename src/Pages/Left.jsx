@@ -11,6 +11,7 @@ import { CiUser } from "react-icons/ci";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IconWithText from "../components/IconWithText";
+import { Link } from "react-router-dom";
 
 const Left = ({ name, username, profile }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -36,7 +37,7 @@ const Left = ({ name, username, profile }) => {
     };
 
     return (
-        <div className='mx-2 h-screen w-full flex flex-col'>
+        <div className='mx-2 h-screen   flex flex-col w-1/4 fixed top-0   '>
             <div>
                 <img 
                     src="https://img.freepik.com/free-vector/new-2023-twitter-logo-x-icon-design_1017-45418.jpg?size=626&ext=jpg"
@@ -55,7 +56,7 @@ const Left = ({ name, username, profile }) => {
                 <IconWithText Icon={LuUsers} text="Communities" />
                 <IconWithText Icon={MdWorkspacePremium} text="Premium" />
                 <IconWithText Icon={MdHomeFilled} text="Business" />
-                <IconWithText Icon={CiUser} text="Profile" />
+              <Link to="/user"> <IconWithText Icon={CiUser} text="Profile" /></Link>  
                 <IconWithText Icon={CgMoreO} text="More" />
             </div>
             
@@ -94,7 +95,7 @@ const Left = ({ name, username, profile }) => {
 
                      
                         <div className=" flex flex-col gap-2  mt-4 p-4 w-1/2">
-                            <button onClick={handleLogout} className="bg-white text-black border-2 border-black font-medium py-2 px-4 rounded-full mr-2 hover:bg-gray-700">Log Out</button>
+                            <button onClick={handleLogout} className="bg-white text-black border-2 border-b font-medium py-2 px-4 rounded-full mr-2 hover:bg-gray-700">Log Out</button>
                         
                             <button onClick={handleCancel} className="bg-black border-2 text-white font-medium py-2 px-4 rounded-full hover:bg-gray-400">Cancel</button>
                       

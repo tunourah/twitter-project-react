@@ -16,7 +16,7 @@ const Right = () => {
         }
       ];
   return (
-    <div className='md:flex md:flex-col justify-center mt-5 hidden '>
+    <div className='md:flex md:flex-col justify-center mt-5 hidden  fixed top-0 w-1/4 '>
 {/* search bar  */}
 <div className="relative mb-4 ">
       <input
