@@ -104,7 +104,7 @@ const Signin = () => {
                 onChange={(e) => setYourname(e.target.value)}
                 />
                 <input
-                type="file"
+                type="text"
                 placeholder='Profile Picture'
                 className='bg-gray-800 p-3 rounded-lg text-white'
                 value={profile}

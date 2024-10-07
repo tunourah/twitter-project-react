@@ -7,7 +7,7 @@ import { IoMdStats } from "react-icons/io";
 import { FaRegComment, FaRetweet, FaRegHeart } from "react-icons/fa";
 import { CiBookmark } from "react-icons/ci";
 
-const Main = () => {
+const Main = ({ name, username, profile }) => {
   const [tweet, setTweet] = useState("");
   const [tweets, setTweets] = useState([]);
 
@@ -32,15 +32,15 @@ const Main = () => {
   return (
     <div className="flex flex-col  mt-5 mx-2 sm:mx-5">
       {/* First sections */}
-      <div className="flex justify-around p-3 sm:p-5 border-b-2">
+      <div className="flex justify-around p-3  border-b border-gray-700  sm:p-5  ">
         <button className="text-gray-500 text-sm sm:text-base w-1/2 hover:bg-gray-700">For you</button>
         <button className="text-gray-500 text-sm sm:text-base w-1/2 hover:bg-gray-700">Following</button>
       </div>
-      
+    
       {/* Write tweet section */}
       <div className="p-3 sm:p-4 border-b border-gray-700 flex space-x-2 sm:space-x-3">
         <img
-          src="https://pbs.twimg.com/profile_images/1479980047104716802/59hXnWM__400x400.jpg"
+          src={profile || "https://pbs.twimg.com/media/CNIuzq_WwAALz1u.png"} 
           alt="User Avatar"
           className="h-10 w-10 sm:h-12 sm:w-12 rounded-full"
         />
@@ -72,15 +72,15 @@ const Main = () => {
         <div key={index} className="p-3 sm:p-4 border-b border-gray-700">
           <div className="flex gap-2 sm:gap-3 mt-2">
             <img
-              src="https://pbs.twimg.com/profile_images/1479980047104716802/59hXnWM__400x400.jpg"
+               src={profile || "https://pbs.twimg.com/media/CNIuzq_WwAALz1u.png"} 
               alt="User Avatar"
               className="h-10 w-10 sm:h-12 sm:w-12 rounded-full"
             />
             <div className="w-full">
               <div className="flex justify-between w-full">
                 <div className="flex gap-2 items-center">
-                  <h1 className="text-white font-bold text-sm sm:text-base">nora</h1>
-                  <p className="text-gray-400 text-xs sm:text-sm">@tu_nourah</p>
+                  <h1 className="text-white font-bold text-sm sm:text-base">{name}</h1>
+                  <p className="text-gray-400 text-xs sm:text-sm">{username}</p>
                   <p className="text-gray-400 text-xs sm:text-sm">· {formatTime(tweetData.time)}</p>
                 </div>
                 <button className="font-bold text-gray-500 hover:text-blue-500 rounded-full hover:bg-gray-800 p-1">
