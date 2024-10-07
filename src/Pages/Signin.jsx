@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios'; // Import axios
-
+import { Link } from 'react-router-dom';
 const Signin = () => {
   // State management for form inputs
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [yourname, setYourname] = useState('');
+  const [profile, setProfile] = useState('');
   const [errors, setErrors] = useState(''); // Add error state for displaying error messages
 
   const validateForm = () => {
@@ -30,7 +32,7 @@ const Signin = () => {
     }
 
     setErrors(formErrors);
-    return formErrors === ''; // Return true if no errors
+    return formErrors === '';  
   };
 
   const handleSignup = async (e) => {
@@ -41,7 +43,7 @@ const Signin = () => {
       return; // Stop if there are validation errors
     }
 
-    const newUser = { email, username, password };
+    const newUser = { email, username, password , yourname, profile};  
 
     try {
       const response = await axios.post('https://670398d0ab8a8f892730c8c1.mockapi.io/registrations', newUser);
@@ -95,6 +97,23 @@ const Signin = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
               <input
+                type="text"
+                placeholder='Your Name'
+                className='bg-gray-800 p-3 rounded-lg text-white'
+                value={yourname}
+                onChange={(e) => setYourname(e.target.value)}
+                />
+                <input
+                type="file"
+                placeholder='Profile Picture'
+                className='bg-gray-800 p-3 rounded-lg text-white'
+                value={profile}
+                onChange={(e) => setProfile(e.target.value
+                )}
+
+
+                 />
+              <input
                 type="password"
                 placeholder='Password'
                 className='bg-gray-800 p-3 rounded-lg text-white'
@@ -109,9 +128,11 @@ const Signin = () => {
           </div>
           <div className='mt-5'>
             <h1 className='text-white font-extrabold text-2xl p-5'>Already have an account?</h1>
+            <Link  to="/login">
             <button className='text-blue-500 p-3 rounded-full border w-full border-gray-700 font-bold'>
               Sign in
             </button>
+            </Link>
           </div>
         </div>
       </div>

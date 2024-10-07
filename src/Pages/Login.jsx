@@ -16,29 +16,38 @@ const Login = () => {
     
     if (!email || !password) {
       setErrors('Email and password are required.');
+      console.log('Errors set:', 'Email and password are required.');
       setLoading(false);  
       return;
     }
-
-    const userCredentials = { email, password };
-
+    
     try {
-      const response = await axios.post('https://670398d0ab8a8f892730c8c1.mockapi.io/registrations', userCredentials);
-      console.log('User logged in successfully:', response.data);
-      localStorage.setItem('user', JSON.stringify(response.data));
-      navigate('/home');
+      const response = await axios.get(`https://670398d0ab8a8f892730c8c1.mockapi.io/registrations?email=${email}&password=${password}`);
+      
+       
+      if (response.data.length > 0) {
+        console.log('User logged in successfully:', response.data[0]);
+        localStorage.setItem('user', JSON.stringify(response.data[0]));
+        navigate('/home');
+      } else {
+        setErrors('Invalid email or password.');
+        console.log('Errors set:', 'Invalid email or password.');
+      }
     } catch (error) {
       if (error.response) {
         console.log('Login failed:', error.response.data.message);
-        setErrors(error.response.data.message);
+        setErrors("Invalid email or password.");
       } else {
         console.error('Error logging in:', error.message);
         setErrors('Failed to log in. Please try again.');
       }
+      console.log('Errors set:', error.message);
     } finally {
       setLoading(false); 
     }
   };
+  
+  
 
   return (
     <div>
