@@ -10,7 +10,7 @@ const IconWithText = ({ Icon, text }) => {
       </div>
 
       {/* Text */}
-      <h1 className="text-white text-xl font-medium">
+      <h1 className="text-white text-xl font-medium hidden sm:block">
         {text}  
       </h1>
     </div>
