@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const User = ({ user }) => {
   const [userPosts, setUserPosts] = useState([]);
+  const [postToDelete, setPostToDelete] = useState(null); // Track the post to delete
+  const [confirm, setConfirm] = useState(false); // Track whether to show the confirm dialog
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Track dropdown visibility
 
   useEffect(() => {
     // Fetch posts from the API
@@ -20,26 +24,39 @@ const User = ({ user }) => {
     fetchPosts();
   }, [user.username]);
 
-  const deletePost = async (postId) => {
-    try {
-      await axios.delete(`https://670398d0ab8a8f892730c8c1.mockapi.io/tweet/${postId}`);
-      // Update local state to remove the deleted post
-      setUserPosts(prevPosts => prevPosts.filter(post => post.id !== postId));
-    } catch (error) {
-      console.error("Error deleting tweet:", error);
+  const handleDelete = async () => {
+    if (postToDelete) {
+      try {
+        await axios.delete(`https://670398d0ab8a8f892730c8c1.mockapi.io/tweet/${postToDelete.id}`);
+        // Update local state to remove the deleted post
+        setUserPosts(prevPosts => prevPosts.filter(post => post.id !== postToDelete.id));
+        setConfirm(false); // Hide confirmation after deletion
+        setPostToDelete(null); // Clear post to delete
+      } catch (error) {
+        console.error("Error deleting tweet:", error);
+      }
     }
   };
 
+  const handleCancel = () => {
+    setConfirm(false); // Hide confirmation dialog
+    setPostToDelete(null); // Clear the post to delete
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
+  };
+
   return (
-    <div className='px-5 bg-black text-white'>
+    <div className='px-3 bg-black text-white'>
       {/* Header */}
-      <div className='flex gap-5 mt-5 bg-black items-center'>
+      <div className='flex gap-2 mt-3 bg-black items-center'>
+        <Link to="/home">
+          <FaArrowLeft className='text-gray-400 cursor-pointer' />
+        </Link>
         <div>
-          <FaArrowLeft className='text-gray-400' />
-        </div>
-        <div>
-          <h1 className='text-xl font-bold'>Profile</h1>
-          <p className='text-gray-400'>{userPosts.length} Posts</p> {/* Number of posts */}
+          <h1 className='text-lg font-bold'>Profile</h1>
+          <p className='text-gray-400'>{userPosts.length} Posts</p>
         </div>
       </div>
       
@@ -48,52 +65,52 @@ const User = ({ user }) => {
         <img 
           src={user.banner || "https://pbs.twimg.com/profile_banners/1017686151883345921/1640925966/1500x500"} 
           alt="Profile Banner" 
-          className='w-full rounded-lg' 
+          className='w-full h-32 rounded-lg' 
         />
-        <div className='flex justify-between items-center'>
+        <div className='flex flex-col items-start'>
           <div>
             <img 
               src={user.profile || "https://pbs.twimg.com/profile_images/1479980047104716802/59hXnWM__400x400.jpg"} 
               alt="Profile" 
-              className='h-32 w-32 rounded-full -mt-20 border-4 border-gray-800' 
+              className='h-24 w-24 rounded-full -mt-12 border-4 border-gray-800' 
             />
           </div>
-          <button className='bg-blue-500 text-white p-2 rounded'>Edit Profile</button>
+          <button className='bg-blue-500 text-white p-2 rounded mt-2'>Edit Profile</button>
         </div>
         <div className='mt-3'>
-          <h1 className='text-xl font-bold'>{user.name}</h1>
+          <h1 className='text-lg font-bold'>{user.name}</h1>
           <p className='text-gray-400'>@{user.username}</p>
-          <p className='text-white'>{user.bio || "Bio: Your bio goes here."}</p>
+          <p className='text-white'>{user.bio || " your bio here"}</p>
           <p className='text-gray-400'>Joined {user.joinDate || "Date not available"}</p>
-          <div className='flex gap-4 mt-5'>
+          <div className='flex  gap-2 mt-5'>
             <div className='flex gap-2'>
               <h1 className='text-white font-bold'>{user.followers}</h1>
-              <p className='text-gray-400'>Followers</p>
+              <p className='text-gray-400'> 100 Followers</p>
             </div>
             <div className='flex gap-2'>
               <h1 className='text-white font-bold'>{user.following}</h1>
-              <p className='text-gray-400'>Following</p>
+              <p className='text-gray-400'>56 Following</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Post Category */}
-      <div className='flex mt-5 justify-between'>
-        <button className='text-gray-400 font-bold'>Posts</button>
-        <button className='text-gray-400'>Replies</button>
-        <button className='text-gray-400'>Highlights</button>
-        <button className='text-gray-400'>Articles</button>
-        <button className='text-gray-400'>Media</button>
-        <button className='text-gray-400'>Likes</button>
+      <div className='flex flex-wrap justify-between mt-5 gap-2'>
+        <button className='text-gray-400 font-bold hover:text-white'>Posts</button>
+        <button className='text-gray-400 hover:text-white'>Replies</button>
+        <button className='text-gray-400 hidden sm:block hover:text-white' >Highlights</button>
+        <button className='text-gray-400  hidden sm:block hover:text-white'>Articles</button>
+        <button className='text-gray-400 hover:text-white'>Media</button>
+        <button className='text-gray-400 hover:text-white'>Likes</button>
       </div>
 
       {/* Tweets Section */}
       <div className='mt-5'>
         {userPosts.map((post) => (
-          <div key={post.id} className='bg-gray-800 p-4 rounded-lg mb-4'>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
+          <div key={post.id} className='bg-gray-800 p-2 rounded-lg mb-4'>
+            <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-2">
+              <div className="flex items-center gap-2">
                 <img 
                   src={post.profile || user.profile} 
                   alt={post.name} 
@@ -105,14 +122,14 @@ const User = ({ user }) => {
                 </div>
               </div>
               <button 
-                onClick={() => deletePost(post.id)} 
+                onClick={() => { setPostToDelete(post); setConfirm(true); }} // Trigger delete confirmation
                 className='text-red-500 hover:text-red-700'
               >
                 Delete
               </button>
             </div>
             <p className='mt-2'>{post.content}</p>
-            <div className='flex gap-4 mt-3 text-gray-400'>
+            <div className='flex  sm:justify-between gap-2 mt-3 text-gray-400'>
               <p>{post.likes || 0} Likes</p>
               <p>{post.retweets || 0} Retweets</p>
               {post.stats && <p>{post.stats} Views</p>}
@@ -120,6 +137,32 @@ const User = ({ user }) => {
           </div>
         ))}
       </div>
+
+ 
+      {confirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-black p-5 rounded-lg shadow-lg">
+            <h2 className="text-lg font-bold">Confirm Delete</h2>
+            <p>Are you sure you want to delete this post?</p>
+            <div className="flex justify-end gap-2 mt-4">
+              <button 
+                onClick={handleCancel} 
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleDelete} 
+                className="px-4 py-2 bg-red-500 text-white rounded-lg"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+     
     </div>
   );
 };

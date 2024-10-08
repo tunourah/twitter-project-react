@@ -39,8 +39,8 @@ const Profile = () => {
           <div className="col-span-3">
             <Left />
           </div>
-          <div className="col-span-6 text-white">
-            {/* Pass user and posts as props */}
+          <div className=" col-span-9 sm:col-span-6 text-white">
+             
             <User user={user} />
           </div>
           <div className="col-span-3">

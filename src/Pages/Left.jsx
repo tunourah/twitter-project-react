@@ -78,7 +78,7 @@ const Left = ({ name, username, profile }) => {
                 </div>
                 <button onClick={toggleDropdown} className="text-white hidden sm:block">...</button>
                 {isDropdownOpen && (
-                    <div className="absolute bottom-10 left-52 mt-2 bg-gray-800 text-white p-4 shadow-md shadow-white rounded-lg">
+                    <div className="absolute bottom-10 left-52 mt-2 bg-black text-white p-4 shadow-md shadow-white rounded-lg">
                         <button onClick={handleLogoutClick} className="block w-full text-left px-4 py-2 hover:bg-gray-700">
                             Logout
                         </button>
