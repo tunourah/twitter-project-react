@@ -60,7 +60,7 @@ const Left = ({ name, username, profile }) => {
                 <IconWithText Icon={CgMoreO} text="More" />
             </div>
             
-            <button className="bg-blue-500 text-white rounded-full py-2 px-1 sm:py-4 sm:px-2 mt-4 w-3/4 hover:bg-blue-600">
+            <button className="bg-blue-500 text-white rounded-full py-2 px-1 hidden sm:block sm:py-4 sm:px-2 mt-4 w-3/4 hover:bg-blue-600">
                 Post
             </button>
 

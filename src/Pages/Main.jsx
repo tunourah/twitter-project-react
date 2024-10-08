@@ -17,23 +17,31 @@ const Main = ({ name, username, profile }) => {
         const fetchTweets = async () => {
             try {
                 const response = await axios.get('https://670398d0ab8a8f892730c8c1.mockapi.io/tweet'); 
-
-                // Map through the response data to add random stat numbers if not present
+    
                 const enrichedTweets = response.data.map(tweetData => ({
                     ...tweetData,
                     stats: tweetData.stats || Math.floor(Math.random() * 10000), 
                 }));
-
+    
                 // Retrieve tweets from localStorage
                 const storedTweets = JSON.parse(localStorage.getItem('userTweets')) || [];
-
-                setTweets([...storedTweets, ...enrichedTweets]);
+    
+                // Combine the two arrays and filter out duplicates based on tweet id
+                const combinedTweets = [...storedTweets, ...enrichedTweets].reduce((unique, tweet) => {
+                    if (!unique.some(t => t.id === tweet.id)) {
+                        unique.push(tweet);
+                    }
+                    return unique;
+                }, []);
+    
+                setTweets(combinedTweets);
             } catch (error) {
                 console.error("Error fetching tweets:", error);
             }
         };
         fetchTweets();
     }, []);
+    
 
     // Save tweet to localStorage
     const saveTweetToLocalStorage = (newTweet) => {
