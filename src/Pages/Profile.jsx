@@ -33,8 +33,8 @@ const Profile = () => {
   }
 
   return (
-    <div className="bg-black min-h-screen">
-      <div className="container mx-auto bg-black">
+    <div className="bg-black  ">
+      <div className="container mx-auto   bg-black">
         <div className="w-full grid grid-cols-12">
           <div className="col-span-3">
             <Left />

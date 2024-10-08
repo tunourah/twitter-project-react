@@ -8,6 +8,8 @@ const User = ({ user }) => {
   const [postToDelete, setPostToDelete] = useState(null); // Track the post to delete
   const [confirm, setConfirm] = useState(false); // Track whether to show the confirm dialog
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Track dropdown visibility
+  const [editingPhoto, setEditingPhoto] = useState(false); // Track if user is editing profile photo
+  const [newProfilePhoto, setNewProfilePhoto] = useState(''); // New profile photo URL
 
   useEffect(() => {
     // Fetch posts from the API
@@ -47,10 +49,23 @@ const User = ({ user }) => {
     setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
   };
 
+  const handleEditPhoto = () => {
+    setEditingPhoto(true); // Open photo edit mode
+  };
+
+  const handleSavePhoto = () => {
+    // Update user's profile photo
+    if (newProfilePhoto) {
+      user.profile = newProfilePhoto;
+      setEditingPhoto(false); // Close photo edit mode
+      setNewProfilePhoto(''); // Reset input field
+    }
+  };
+
   return (
     <div className='px-3 bg-black text-white'>
       {/* Header */}
-      <div className='flex gap-2 mt-3 bg-black items-center'>
+      <div className='flex gap-2 mt-3  bg-black items-center'>
         <Link to="/home">
           <FaArrowLeft className='text-gray-400 cursor-pointer' />
         </Link>
@@ -69,13 +84,36 @@ const User = ({ user }) => {
         />
         <div className='flex flex-col items-start'>
           <div>
-            <img 
-              src={user.profile || "https://pbs.twimg.com/profile_images/1479980047104716802/59hXnWM__400x400.jpg"} 
-              alt="Profile" 
-              className='h-24 w-24 rounded-full -mt-12 border-4 border-gray-800' 
-            />
+            {editingPhoto ? (
+              <div className='flex flex-col items-start'>
+                <input 
+                  type="text" 
+                  placeholder="New Profile Photo URL" 
+                  value={newProfilePhoto}
+                  onChange={(e) => setNewProfilePhoto(e.target.value)}
+                  className='text-black p-1 rounded'
+                />
+                <button 
+                  onClick={handleSavePhoto}
+                  className='bg-blue-500 text-white p-2 rounded mt-2'>
+                  Save Photo
+                </button>
+              </div>
+            ) : (
+              <img 
+                src={user.profile || "https://pbs.twimg.com/profile_images/1479980047104716802/59hXnWM__400x400.jpg"} 
+                alt="Profile" 
+                className='h-24 w-24 rounded-full -mt-12 border-4 border-gray-800' 
+              />
+            )}
           </div>
-          <button className='bg-blue-500 text-white p-2 rounded mt-2'>Edit Profile</button>
+          {!editingPhoto && (
+            <button 
+              className='bg-blue-500 text-white p-2 rounded mt-2'
+              onClick={handleEditPhoto}>
+              Edit Profile Photo
+            </button>
+          )}
         </div>
         <div className='mt-3'>
           <h1 className='text-lg font-bold'>{user.name}</h1>
@@ -138,7 +176,7 @@ const User = ({ user }) => {
         ))}
       </div>
 
- 
+      {/* Confirm Delete Dialog */}
       {confirm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-black p-5 rounded-lg shadow-lg">
@@ -161,8 +199,6 @@ const User = ({ user }) => {
           </div>
         </div>
       )}
-
-     
     </div>
   );
 };

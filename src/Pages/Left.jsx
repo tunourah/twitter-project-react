@@ -37,7 +37,7 @@ const Left = ({ name, username, profile }) => {
     };
 
     return (
-        <div className='mx-2 h-screen   flex flex-col w-1/4 fixed top-0   '>
+        <div className='mx-2     flex flex-col w-1/4 fixed top-0   '>
             <div>
                 <img 
                     src="https://img.freepik.com/free-vector/new-2023-twitter-logo-x-icon-design_1017-45418.jpg?size=626&ext=jpg"
@@ -47,7 +47,7 @@ const Left = ({ name, username, profile }) => {
             </div>
             
             <div>
-                <IconWithText Icon={MdHomeFilled} text="Home" />
+                <Link to={"/home"} ><IconWithText Icon={MdHomeFilled} text="Home" /></Link>
                 <IconWithText Icon={IoSearch} text="Explore" />
                 <IconWithText Icon={RiNotification2Line} text="Notification" />
                 <IconWithText Icon={LuMessageSquare} text="Messages" />
@@ -76,7 +76,7 @@ const Left = ({ name, username, profile }) => {
                         <p className="text-gray-400 hidden sm:block">{username}</p>
                     </div>
                 </div>
-                <button onClick={toggleDropdown} className="text-white hidden sm:block">...</button>
+                <button onClick={toggleDropdown} className="text-white  ">...</button>
                 {isDropdownOpen && (
                     <div className="absolute bottom-10 left-52 mt-2 bg-black text-white p-4 shadow-md shadow-white rounded-lg">
                         <button onClick={handleLogoutClick} className="block w-full text-left px-4 py-2 hover:bg-gray-700">
