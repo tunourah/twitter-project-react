@@ -12,8 +12,7 @@ const Main = ({ name, username, profile }) => {
     const [tweet, setTweet] = useState("");
     const [tweets, setTweets] = useState([]);
 
-    // Fetch tweets from API and local storage when the component mounts
-    useEffect(() => {
+     useEffect(() => {
         const fetchTweets = async () => {
             try {
                 const response = await axios.get('https://670398d0ab8a8f892730c8c1.mockapi.io/tweet'); 
@@ -23,11 +22,9 @@ const Main = ({ name, username, profile }) => {
                     stats: tweetData.stats || Math.floor(Math.random() * 10000), 
                 }));
     
-                // Retrieve tweets from localStorage
-                const storedTweets = JSON.parse(localStorage.getItem('userTweets')) || [];
+                 const storedTweets = JSON.parse(localStorage.getItem('userTweets')) || [];
     
-                // Combine the two arrays and filter out duplicates based on tweet id
-                const combinedTweets = [...storedTweets, ...enrichedTweets].reduce((unique, tweet) => {
+                 const combinedTweets = [...storedTweets, ...enrichedTweets].reduce((unique, tweet) => {
                     if (!unique.some(t => t.id === tweet.id)) {
                         unique.push(tweet);
                     }
