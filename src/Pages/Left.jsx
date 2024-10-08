@@ -88,10 +88,10 @@ const Left = ({ name, username, profile }) => {
 
             {confirm && ( // Render confirmation dialog
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 m-5 ">
-                    <div className="bg-gray-900 w-1/2 flex flex-col justify-center items-center mx-auto  text-white p-5 rounded-lg">
+                    <div className="bg-gray-900 sm:w-1/2 flex flex-col justify-center items-center mx-auto  text-white p-5 rounded-lg">
                         <h2 className="mb-4">Log out of X?</h2>
                         
-                        <p className="w-1/2">You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account.</p>
+                        <p className="sm:w-1/2">You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account.</p>
 
                      
                         <div className=" flex flex-col gap-2  mt-4 p-4 w-1/2">
