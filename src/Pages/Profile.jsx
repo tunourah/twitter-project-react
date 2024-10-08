@@ -34,7 +34,7 @@ const Profile = () => {
 
   return (
     <div className="bg-black  ">
-      <div className="container mx-auto h-screen bg-black">
+      <div className="container mx-auto h-screen sm:h-full bg-black">
         <div className="w-full grid grid-cols-12">
           <div className="col-span-3">
             <Left />

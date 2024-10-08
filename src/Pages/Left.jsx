@@ -48,7 +48,7 @@ const Left = ({ name, username, profile }) => {
             
             <div>
                 <Link to={"/home"} ><IconWithText Icon={MdHomeFilled} text="Home" /></Link>
-                <IconWithText Icon={IoSearch} text="Explore" />
+                <IconWithText Icon={IoSearch} text="Explore"  />
                 <IconWithText Icon={RiNotification2Line} text="Notification" />
                 <IconWithText Icon={LuMessageSquare} text="Messages" />
                 <IconWithText Icon={FaRegSquare} text="Gork" />
