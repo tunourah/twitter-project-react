@@ -36,14 +36,14 @@ const Profile = () => {
     <div className="bg-black  ">
       <div className="container mx-auto h-screen sm:h-full bg-black">
         <div className="w-full grid grid-cols-12">
-          <div className="col-span-3">
+          <div className=" hidden sm:block sm:col-span-3">
             <Left />
           </div>
-          <div className=" col-span-9 sm:col-span-6 text-white">
+          <div className=" p-2 col-span-12 sm:p-0 sm:col-span-6 text-white">
              
             <User user={user} />
           </div>
-          <div className="col-span-3">
+          <div className="hidden sm:block  sm:col-span-3">
             <Right />
           </div>
         </div>
