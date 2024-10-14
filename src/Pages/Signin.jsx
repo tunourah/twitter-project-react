@@ -67,75 +67,73 @@ const Signin = () => {
 
   return (
     <div>
-      <div className='h-screen flex flex-col md:flex-row md:justify-around justify-center items-center bg-black p-5'>
-        <div>
-          <img
-            src="https://img.freepik.com/free-vector/new-2023-twitter-logo-x-icon-design_1017-45418.jpg?size=626&ext=jpg"
-            alt="logo"
-            className="rounded-full w-[60%] hover:border-gray-500"
-          />
-        </div>
-        <div>
-          <div>
-            <h1 className='text-white font-extrabold text-4xl p-5'>Happening now</h1>
-          </div>
-          <div>
-            <h1 className='text-white font-extrabold text-2xl p-5'>Join X today.</h1>
-            <form className='flex flex-col gap-4' onSubmit={handleSignup}>
-              <input
-                type="text"
-                placeholder='Email address'
-                className='bg-gray-800 p-3 rounded-lg text-white'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder='User Name'
-                className='bg-gray-800 p-3 rounded-lg text-white'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder='Your Name'
-                className='bg-gray-800 p-3 rounded-lg text-white'
-                value={yourname}
-                onChange={(e) => setYourname(e.target.value)}
-                />
-                <input
-                type="text"
-                placeholder='Profile Picture'
-                className='bg-gray-800 p-3 rounded-lg text-white'
-                value={profile}
-                onChange={(e) => setProfile(e.target.value
-                )}
+      <div className='flex flex-col md:flex-row md:h-screen md:justify-around justify-center items-center bg-black p-5'>
+  <div className='w-full md:w-1/3 flex justify-center md:justify-start'>
+    <img
+      src="https://img.freepik.com/free-vector/new-2023-twitter-logo-x-icon-design_1017-45418.jpg?size=626&ext=jpg"
+      alt="logo"
+      className="rounded-full w-24 md:w-[60%] hover:border-gray-500"
+    />
+  </div>
+  <div className='w-full md:w-1/2'>
+    <div>
+      <h1 className='text-white font-extrabold text-2xl md:text-4xl p-5 text-center md:text-left'>Happening now</h1>
+    </div>
+    <div>
+      <h1 className='text-white font-extrabold text-xl md:text-2xl p-5 text-center md:text-left'>Join X today.</h1>
+      <form className='flex flex-col gap-4' onSubmit={handleSignup}>
+        <input
+          type="text"
+          placeholder='Email address'
+          className='bg-gray-800 p-3 rounded-lg text-white w-full'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder='User Name'
+          className='bg-gray-800 p-3 rounded-lg text-white w-full'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder='Your Name'
+          className='bg-gray-800 p-3 rounded-lg text-white w-full'
+          value={yourname}
+          onChange={(e) => setYourname(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder='Profile Picture'
+          className='bg-gray-800 p-3 rounded-lg text-white w-full'
+          value={profile}
+          onChange={(e) => setProfile(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder='Password'
+          className='bg-gray-800 p-3 rounded-lg text-white w-full'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {errors && <p className='text-red-500'>{errors}</p>} {/* Display error messages */}
+        <button className='bg-blue-500 p-3 rounded-lg text-white w-full' type='submit'>
+          Sign up
+        </button>
+      </form>
+    </div>
+    <div className='mt-5'>
+      <h1 className='text-white font-extrabold text-xl md:text-2xl p-5 text-center md:text-left'>Already have an account?</h1>
+      <Link to="/login">
+        <button className='text-blue-500 p-3 rounded-full border w-full border-gray-700 font-bold'>
+          Sign in
+        </button>
+      </Link>
+    </div>
+  </div>
+</div>
 
-
-                 />
-              <input
-                type="password"
-                placeholder='Password'
-                className='bg-gray-800 p-3 rounded-lg text-white'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {errors && <p className='text-red-500'>{errors}</p>} {/* Display error messages */}
-              <button className='bg-blue-500 p-3 rounded-lg text-white' type='submit'>
-                Sign up
-              </button>
-            </form>
-          </div>
-          <div className='mt-5'>
-            <h1 className='text-white font-extrabold text-2xl p-5'>Already have an account?</h1>
-            <Link  to="/login">
-            <button className='text-blue-500 p-3 rounded-full border w-full border-gray-700 font-bold'>
-              Sign in
-            </button>
-            </Link>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

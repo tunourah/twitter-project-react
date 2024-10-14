@@ -51,7 +51,7 @@ const Login = () => {
 
   return (
     <div>
-      <div className='h-screen flex flex-col md:flex-row md:justify-around justify-center items-center bg-black p-5'>
+      <div className='min-h-screen flex flex-col md:flex-row md:justify-around justify-center items-center bg-black p-5'>
         <div>
           <img
             src="https://img.freepik.com/free-vector/new-2023-twitter-logo-x-icon-design_1017-45418.jpg?size=626&ext=jpg"
